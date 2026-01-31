@@ -56,3 +56,9 @@ mlp = MLPRegressor(random_state=42,
 mlp.fit(X_train_scaled, y_train)
 
 print(X_train_scaled)
+
+# Step 2: Predict on all splits
+y_pred_train = mlp.predict(X_train_scaled)
+y_pred_val   = mlp.predict(X_val_scaled)
+y_pred_test  = mlp.predict(X_test_scaled)
+ 
