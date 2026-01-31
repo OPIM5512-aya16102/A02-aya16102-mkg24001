@@ -62,3 +62,22 @@ y_pred_train = mlp.predict(X_train_scaled)
 y_pred_val   = mlp.predict(X_val_scaled)
 y_pred_test  = mlp.predict(X_test_scaled)
  
+# Step 3: Scatterplots: predicted vs actual (one figure per split; y=x reference line)
+def scatter_with_reference(y_true, y_pred, title):
+    plt.figure(figsize=(6,6))
+    plt.scatter(y_true, y_pred, alpha=0.3, s=10)
+    lo = min(np.min(y_true), np.min(y_pred))
+    hi = max(np.max(y_true), np.max(y_pred))
+    plt.plot([lo, hi], [lo, hi], linewidth=1, color='red')  # reference line
+    plt.xlabel("Actual MedHouseVal")
+    plt.ylabel("Predicted MedHouseVal")
+    plt.title(title)
+    plt.tight_layout()
+    plt.show()
+
+scatter_with_reference(y_train, y_pred_train, "Predicted vs Actual — Train")
+# Save the plot
+plt.savefig("figs/train_actual_vs_pred.png", dpi=300, bbox_inches="tight")
+plt.close()
+scatter_with_reference(y_test,  y_pred_test,  "Predicted vs Actual — Test")
+plt.savefig("figs/test_actual_vs_pred.png", dpi=300, bbox_inches="tight")
